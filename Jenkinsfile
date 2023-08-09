@@ -1,15 +1,16 @@
 pipeline {
       agent any
       stages {
-            stage('Init') {
+            stage('Gradle Build Application') {
                   steps {
-                        echo 'Hi, this is Anshul from LevelUp360'
-                        echo 'We are Starting the Testing'
+                        echo '<<<Starting Build>>>'
+						bat  'gradlew clean build test'						
+                        echo '<<<End Build>>>'
                   }
             }
-            stage('Build') {
+            stage('Test') {
                   steps {
-                        echo 'Building Sample Maven Project'
+                        echo 'Building Sample Gradle Project'
                   }
             }
             stage('Deploy') {
