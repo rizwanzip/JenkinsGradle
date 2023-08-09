@@ -4,9 +4,15 @@ pipeline {
             stage('Gradle Build Application') {
                   steps {
                         echo '<<<Starting Build>>>'
-						bat  'gradlew clean build'						
+						bat  'gradlew clean build test'						
                         echo '<<<End Build>>>'
                   }
+				   post {
+						success {
+							echo "Now Archiving the Artifacts...."
+							archiveArtifacts artifacts: '**/*.war'
+						}
+					}
             }
             stage('Test') {
                   steps {
