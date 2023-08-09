@@ -4,7 +4,7 @@ pipeline {
             stage('Gradle Build Application') {
                   steps {
                         echo '<<<Starting Build>>>'
-						bat  'gradlew clean build test'						
+						bat  'gradlew clean build'						
                         echo '<<<End Build>>>'
                   }
             }
