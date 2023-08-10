@@ -28,15 +28,5 @@ pipeline {
                   steps {
                         echo "Deploying in Production Area"
                   }
-            }
-			stage("Copy"){
-				  steps {
-					fileOperations([fileCopyOperation(
-					excludes: '',
-					flattenFiles: false,
-					includes: '**/*.*',
-					targetLocation: "H:\\GitJenkinsBuild\\ArtifactBuild"
-					)])
-				  }
-      }
+            }			
 }
