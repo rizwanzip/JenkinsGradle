@@ -10,7 +10,7 @@ pipeline {
 				   post {
 						success {
 							echo "Now Archiving the Artifacts...."
-							
+							archiveArtifacts artifacts: '**/*.jar'
 						}
 					}
             }
@@ -29,5 +29,14 @@ pipeline {
                         echo "Deploying in Production Area"
                   }
             }
+			stage("Copy"){
+				  steps {
+					fileOperations([fileCopyOperation(
+					excludes: '',
+					flattenFiles: false,
+					includes: '**/*.*',
+					targetLocation: "H:\\GitJenkinsBuild\\ArtifactBuild"
+					)])
+				  }
       }
 }
