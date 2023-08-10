@@ -7,12 +7,7 @@ pipeline {
 						bat  'gradlew clean build test'						
                         echo '<<<End Build>>>'
                   }
-				   post {
-						success {
-							echo "Now Archiving the Artifacts...."
-							archiveArtifacts artifacts: '**/*.jar'
-						}
-					}
+				  
             }
             stage('Test') {
                   steps {
