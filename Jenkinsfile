@@ -7,16 +7,18 @@ pipeline {
 						bat  'gradlew clean build test'						
                         echo '<<<End Build>>>'
                   }
+				  post {
+						success{
+								echo '<<<Archiving the Aritifact>>>'
+								archiveArtifacts artifact: '**/*.jar'
+							}
+						}
 				  
             }
-            stage('Test') {
+            stage('Deploy in Staging Envoirnment') {
                   steps {
-                        echo 'Building Sample Gradle Project'
-                  }
-            }
-            stage('Deploy') {
-                  steps {
-                        echo "Deploying in Staging Area"
+                        echo '<<<Deploy in Staging Envoirnment>>>'
+						build job: 'DeployApplicationStagingEnv'
                   }
             }
             stage('Deploy Production') {
