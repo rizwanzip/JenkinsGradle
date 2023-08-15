@@ -26,7 +26,7 @@ pipeline {
 						copyArtifacts(projectName: "$JOB_NAME", selector: lastSuccessful(stable: true), optional: true)
 						echo '<<<Starting Staging Deployment: deploy adapters>>>'
 						deploy adapters: [tomcat9(url: 'http://localhost:8082',
-							credentialsId: 'tomcat/123456')], 
+							credentialsId: 'tomcat')], 
 							war: '**/*.war',
 							contextPath: 'app7'
 										
