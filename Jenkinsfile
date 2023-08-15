@@ -1,20 +1,22 @@
 pipeline {
       agent any
 	  parameters {
-        string(name: 'NAME', description: 'Please tell me your name')
-        choice(name: 'GENDER', choices: ['Male', 'Female'], description: 'Choose Gender')
+        string(name: 'NAME', description: 'Please tell me your project name')
+		 string(defaultValue: env.VERSION, description: 'What Version?', name: 'VERSION')
+        //choice(name: 'GENDER', choices: ['Male', 'Female'], description: 'Choose Gender')
     }
       stages {
             stage('Track Build Application') {
                   steps {
+						echo env.VERSION
                         echo '<<<Starting Build>>>'
-						bat 'gradlew.bat build test'  					
+						//bat 'gradlew.bat build test'  					
                         echo '<<<End Build>>>'
                   }
 				  post {
 						success {
 							echo "Now Archiving the Artifacts...."
-							archiveArtifacts artifacts: '**/*.war'
+							//archiveArtifacts artifacts: '**/*.war'
 						}
 					}				  
 				  
@@ -23,12 +25,12 @@ pipeline {
                   steps {                        
 						echo '<<<Starting Staging Deployment: copyArtifacts>>>'
 						
-						copyArtifacts(projectName: "$JOB_NAME", selector: lastSuccessful(stable: true), optional: true)
+						//copyArtifacts(projectName: "$JOB_NAME", selector: lastSuccessful(stable: true), optional: true)
 						echo '<<<Starting Staging Deployment: deploy adapters>>>'
-						deploy adapters: [tomcat9(url: 'http://localhost:8082',
-							credentialsId: 'tomcat9')], 
-							war: '**/*.war',
-							contextPath: 'app7'
+						//deploy adapters: [tomcat9(url: 'http://localhost:8082',
+						//	credentialsId: 'tomcat9')], 
+						//	war: '**/*.war',
+						//	contextPath: 'app7'
 										
                         echo '<<<End Staging Deployment>>>'
                   }
