@@ -17,8 +17,14 @@ pipeline {
             }
             stage('Track Deploy in Staging Envoirnment') {
                   steps {                        
-						echo '<<<Starting Staging Deployment>>>'
-						build job: 'TrackApp-Staging-Deployment'						
+						echo '<<<Starting Staging Deployment: copyArtifacts>>>'
+						copyArtifacts fingerprintArtifacts: true, projectName: 'TrackApp-Build2', fingerprint: true, selector: lastCompleted()
+						echo '<<<Starting Staging Deployment: deploy adapters>>>'
+						deploy adapters: [tomcat9(url: 'http://localhost:8082',
+							credentialsId: 'tomcat/123456')], 
+							war: '**/*.war',
+							contextPath: 'app7'						
+										
                         echo '<<<End Staging Deployment>>>'
                   }
             }
