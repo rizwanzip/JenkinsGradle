@@ -1,23 +1,19 @@
 pipeline {
       agent any
       stages {
-            stage('Gradle Build Application') {
+            stage('Track Build Application') {
                   steps {
                         echo '<<<Starting Build>>>'
-						bat  'gradlew clean build test'						
+						build job: 'TrackApp-Build'						
                         echo '<<<End Build>>>'
-                  }
-				  post {
-						success{
-								echo '<<<Archiving the Aritifact>>>'
-								archiveArtifacts artifacts: '**/*.war'
-							}
-						}
+                  }			  
 				  
             }
-            stage('Deploy in Staging Envoirnment') {
+            stage('Track Deploy in Staging Envoirnment') {
                   steps {                        
-						build job: 'DeployApplicationStagingEnv'
+						echo '<<<Starting Staging Deployment>>>'
+						build job: 'TrackApp-Staging-Deployment'						
+                        echo '<<<End Staging Deployment>>>'
                   }
             }
             
