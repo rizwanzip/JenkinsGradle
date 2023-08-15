@@ -9,6 +9,11 @@ pipeline {
                   }			  
 
             }
+			stage('Track Test Application') {
+				steps {
+					echo "....Testing In-Progress...."
+				}
+			}
             stage('Track Deploy in Staging Envoirnment') {
                   steps {                        
 						echo '<<<Starting Staging Deployment>>>'
