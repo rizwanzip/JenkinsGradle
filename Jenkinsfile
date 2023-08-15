@@ -21,7 +21,7 @@ pipeline {
             }
             stage('Track Deploy in Staging Envoirnment') {
                   steps {                        
-						echo '<<<Starting Staging Deployment: copyArtifacts>>>'
+						echo '<<<Starting Staging Deployment: copyArtifacts5>>>'
 						
 						copyArtifacts(projectName: "$JOB_NAME", selector: lastSuccessful(stable: true), optional: true)
 										
