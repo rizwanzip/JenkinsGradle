@@ -1,5 +1,9 @@
 pipeline {
       agent any
+	  parameters {
+        string(name: 'NAME', description: 'Please tell me your name')
+        choice(name: 'GENDER', choices: ['Male', 'Female'], description: 'Choose Gender')
+    }
       stages {
             stage('Track Build Application') {
                   steps {
@@ -18,7 +22,8 @@ pipeline {
             stage('Track Deploy in Staging Envoirnment') {
                   steps {                        
 						echo '<<<Starting Staging Deployment: copyArtifacts>>>'
-						copyArtifacts fingerprintArtifacts: true, projectName: 'MyBuildJob', selector: upstream()
+						
+						copyArtifacts(projectName: "$JOB_NAME", selector: lastSuccessful(stable: true), optional: true)
 										
                         echo '<<<End Staging Deployment>>>'
                   }
