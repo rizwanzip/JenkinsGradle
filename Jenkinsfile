@@ -11,11 +11,11 @@ pipeline {
 				  post {
         always {
             emailext(
-				subject: 'email_subject',
+				subject: email_subject,
 				mimetype: 'text/html',
 				to: 'rizwan.ahmed@centegytechnologies.com',
 				recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-				body: 'email_body'
+				body: email_body
 				)
         }
     }
