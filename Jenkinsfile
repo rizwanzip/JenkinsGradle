@@ -10,11 +10,13 @@ pipeline {
                   }
 				          post{
 								success{
+								 script{
 									emailext to: "rizwan.ahmed@centegytechnologies.com",
 									subject: '${DEFAULT_SUBJECT}',
 									body: "Test",
 									mimeType: 'text/html',
 									attachLog: true
+									}
 								}
 							}
 							  
