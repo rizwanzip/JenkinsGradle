@@ -11,8 +11,9 @@ pipeline {
 				          post{
 								always{
 									emailext to: "rizwan.ahmed@centegytechnologies.com",
-									subject: "Test Email",
-									body: "Test"
+									subject: '${DEFAULT_SUBJECT}',
+									body: "Test",
+									mimeType: 'text/html'
 								}
 							}
 							  
