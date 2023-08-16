@@ -5,7 +5,7 @@ pipeline {
                   steps {
                         echo '<<<Starting Build>>>'
 						//build job: 'TrackApp-Build'
-						//bat  'gradlew clean buildc test'						
+						bat  'gradlew clean buildc test'						
                         echo '<<<End Build>>>'
                   }
 				          post{
