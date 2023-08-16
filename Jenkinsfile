@@ -13,7 +13,8 @@ pipeline {
 									emailext to: "rizwan.ahmed@centegytechnologies.com",
 									subject: '${DEFAULT_SUBJECT}',
 									body: "Test",
-									mimeType: 'text/html'
+									mimeType: 'text/html',
+									attachLog: true
 								}
 							}
 							  
