@@ -9,16 +9,20 @@ pipeline {
                         echo '<<<End Build>>>'
                   }
 				  post {
-        always {
-            emailext(
-				subject: email_subject,
-				mimetype: 'text/html',
-				to: 'rizwan.ahmed@centegytechnologies.com',
-				recipientProviders: [[$class: 'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-				body: email_body
-				)
-        }
-    }
+                success {
+                    echo 'Sending test success email..'
+                    script{
+				    emailext(
+				    	from: 'rizwan.ahmed@centegytechnologies.com',
+			            	body: 'hello fawad',			            	
+			            	mimeType: 'text/html',
+			            	subject: '${DEFAULT_SUBJECT}',
+			            	to: 'rizwan.ahmed@centegytechnologies.com'
+			    		)
+                    }
+                    echo 'Email sent..'
+                }                
+            }
 							  
 
             }
