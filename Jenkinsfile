@@ -8,21 +8,13 @@ pipeline {
 						//bat  'gradlew clean buildc test'						
                         echo '<<<End Build>>>'
                   }
-				  post {
-                success {
-                    echo 'Sending test success email..'
-                    script{
-				    emailext(
-				    	from: 'rizwan.ahmed@centegytechnologies.com',
-			            	body: 'hello fawad',			            	
-			            	mimeType: 'text/html',
-			            	subject: '${DEFAULT_SUBJECT}',
-			            	to: 'rizwan.ahmed@centegytechnologies.com'
-			    		)
-                    }
-                    echo 'Email sent..'
-                }                
-            }
+				      post{
+						always{
+							mail to: "rizwan.ahmed@centegytechnologies.com",
+							subject: "Test Email",
+							body: "Test"
+						}
+					}
 							  
 
             }
