@@ -5,7 +5,7 @@ pipeline {
                   steps {
                         echo '<<<Starting Build>>>'
 						//build job: 'TrackApp-Build'
-						//bat  'gradlew clean buildc test'						
+						bat  'gradlew clean buildc test'						
                         echo '<<<End Build>>>'
                   }
 				          post{
@@ -13,11 +13,21 @@ pipeline {
 								 script{
 									emailext to: "rizwan.ahmed@centegytechnologies.com",
 									subject: '${DEFAULT_SUBJECT}',
-									body: "Test",
+									body: "Test-Success",
 									mimeType: 'text/html',
 									attachLog: true
 									}
 								}
+								failure {                    
+									script{
+									emailext(
+											to: 'rizwan.ahmed@centegytechnologies.com',
+											body: 'Failure',
+											mimeType: 'text/html',
+											subject: '${DEFAULT_SUBJECT}'			            	
+										)
+									}
+                }
 							}
 							  
 
