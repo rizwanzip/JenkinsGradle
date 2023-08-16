@@ -8,13 +8,13 @@ pipeline {
 						//bat  'gradlew clean buildc test'						
                         echo '<<<End Build>>>'
                   }
-				      post{
-						always{
-							mail to: "rizwan.ahmed@centegytechnologies.com",
-							subject: "Test Email",
-							body: "Test"
-						}
-					}
+				          post{
+								always{
+									emailext to: "rizwan.ahmed@centegytechnologies.com",
+									subject: "Test Email",
+									body: "Test"
+								}
+							}
 							  
 
             }
