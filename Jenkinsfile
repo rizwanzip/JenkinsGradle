@@ -5,19 +5,22 @@ pipeline {
                   steps {
                         echo '<<<Starting Build>>>'
 						//build job: 'TrackApp-Build'
-						bat  'gradlew clean build test'						
+					//	bat  'gradlew clean build test'						
                         echo '<<<End Build>>>'
                   }
 				   post {
 						success{
 								echo '<<<Archiving the Aritifact>>>'
-								archiveArtifacts artifacts: '**/*.war'
+						//		archiveArtifacts artifacts: '**/*.war'
 							}
 						}
 				}
 			stage('Create Tomcat Docker Image'){
                 steps {
-                    bat "docker build . -t tomcatsamplewebapp:${env.BUILD_ID}"
+					echo '<<<Starting Docker Image>>>'
+                    //bat "docker build . -t tomcatsamplewebapp:${env.BUILD_ID}"
+					bat ".\gradlew bootBuildImage --imageName=com.centegy.global --builder=paketobuildpacks/builder:tiny  "
+					 echo '<<<End Docker Image>>>'
                 }
             }
 			stage('Track Test Application') {
