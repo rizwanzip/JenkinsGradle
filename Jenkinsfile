@@ -19,7 +19,7 @@ pipeline {
                 steps {
 					echo '<<<Starting Docker Image 2>>>'
                     //bat "docker build . -t tomcatsamplewebapp:${env.BUILD_ID}"
-					bat "gradlew bootBuildImage --imageName=com.centegy.global.001 --builder=paketobuildpacks/builder:tiny  "
+					bat "gradlew bootBuildImage --imageName=com.centegy.global --builder=paketobuildpacks/builder:tiny  "
 					 echo '<<<End Docker Image>>>'
                 }
             }
