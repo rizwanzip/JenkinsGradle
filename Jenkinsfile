@@ -1,9 +1,9 @@
 pipeline {
     agent any
-    //tools{
-    //    jdk 'JDK-17'
-    //    gradle 'GRADLE_HOME'
-    //}
+    tools{
+        jdk 'JDK-17'
+        gradle 'GRADLE_HOME'
+    }
 
     stages {
         //stage('Git Checkout') {
