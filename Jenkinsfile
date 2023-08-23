@@ -1,17 +1,17 @@
 pipeline {
     agent any
-    tools{
-        jdk 'JDK-17'
-        gradle 'GRADLE_HOME'
-    }
+    //tools{
+    //    jdk 'JDK-17'
+    //    gradle 'GRADLE_HOME'
+    //}
 
     stages {
-        stage('Git Checkout') {
-            steps {
-				echo "Checkout...."
+        //stage('Git Checkout') {
+        //    steps {
+		//		echo "Checkout...."
                // git changelog: false, poll: false, url: 'https://github.com/rizwanzip/JenkinsGradle.git'
-            }
-        }
+        //    }
+        //}
         stage('Code Build') {
             steps {
                  echo "Code Build...."
