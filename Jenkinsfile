@@ -37,6 +37,30 @@ pipeline {
                 bat 'docker push centegydocker/com.centegy.global:backoffice' 
                 }
             }
+			post{
+								success{
+								 script{
+									emailext to: "rizwan.ahmed@centegytechnologies.com",
+									subject: '${DEFAULT_SUBJECT}',
+									//body: "Test-Success",
+									 body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}",
+									mimeType: 'text/html',
+									attachLog: true
+									}
+								}
+								failure {                    
+									script{
+									emailext(
+											to: 'rizwan.ahmed@centegytechnologies.com',
+											//body: 'Failure',
+											 body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}",
+											mimeType: 'text/html',
+											subject: '${DEFAULT_SUBJECT}',
+											attachLog: true											
+										)
+									}
+								}	
+				}
         }
     }
 }
