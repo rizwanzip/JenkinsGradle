@@ -8,7 +8,8 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git changelog: false, poll: false, url: 'https://github.com/rizwanzip/JenkinsGradle.git'
+				echo "Checkout...."
+               // git changelog: false, poll: false, url: 'https://github.com/rizwanzip/JenkinsGradle.git'
             }
         }
         stage('Code Build') {
