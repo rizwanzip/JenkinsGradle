@@ -29,6 +29,30 @@ pipeline {
                 echo "Docker Build...."
                 bat 'gradlew bootBuildImage --imageName=centegydocker/com.centegy.global --builder=paketobuildpacks/builder:tiny'
             }
+			post{
+				success{
+					 script{
+							emailext(
+							to: "rizwan.ahmed@centegytechnologies.com",
+							subject: 'DockerHub Build Image: ${DEFAULT_SUBJECT}',									
+							body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}",
+							mimeType: 'text/html',
+							attachLog: true
+							)
+						}
+					}
+				failure {                    
+					script{
+						emailext(
+							to: 'rizwan.ahmed@centegytechnologies.com',
+							body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}",
+							mimeType: 'text/html',
+							subject: 'DockerHub Build Image: ${DEFAULT_SUBJECT}',
+							attachLog: true											
+							)
+						}
+					}	
+				}
         }
         stage('DockerHub Push Image') {
             steps {
@@ -38,28 +62,28 @@ pipeline {
                 }
             }
 			post{
-								success{
-								 script{
-									emailext to: "rizwan.ahmed@centegytechnologies.com",
-									subject: '${DEFAULT_SUBJECT}',
-									//body: "Test-Success",
-									 body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}",
-									mimeType: 'text/html',
-									attachLog: true
-									}
-								}
-								failure {                    
-									script{
-									emailext(
-											to: 'rizwan.ahmed@centegytechnologies.com',
-											//body: 'Failure',
-											 body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}",
-											mimeType: 'text/html',
-											subject: '${DEFAULT_SUBJECT}',
-											attachLog: true											
-										)
-									}
-								}	
+				success{
+					 script{
+							emailext(
+							to: "rizwan.ahmed@centegytechnologies.com",
+							subject: 'DockerHub Push Image: ${DEFAULT_SUBJECT}',									
+							body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}",
+							mimeType: 'text/html',
+							attachLog: true
+							)
+						}
+					}
+				failure {                    
+					script{
+						emailext(
+							to: 'rizwan.ahmed@centegytechnologies.com',
+							body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}",
+							mimeType: 'text/html',
+							subject: 'DockerHub Push Image: ${DEFAULT_SUBJECT}',
+							attachLog: true											
+							)
+						}
+					}	
 				}
         }
     }
